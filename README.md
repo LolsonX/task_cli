@@ -26,11 +26,9 @@ Create, list, complete, and save your tasks — all from your terminal!
 
 Clone the repository:
 
-# TODO: Insert correct paths
-
 ```bash
-git clone https://github.com/lolsonx/taskcli.git
-cd taskcli
+git clone https://github.com/LolsonX/task_cli
+cd task_cli
 
 Fetch dependencies:
 
