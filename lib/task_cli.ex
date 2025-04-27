@@ -1,7 +1,7 @@
 defmodule TaskCli do
   alias TaskCli.{Storage, State, Commands, UI}
 
-  def start do
+  def main(_args) do
     UI.clear_screen()
     IO.puts("Welcome to TaskCLI! Type 'help' for commands.")
 

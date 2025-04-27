@@ -1,14 +1,20 @@
 defmodule TaskCli.MixProject do
   use Mix.Project
+  @app_name :task_cli
 
   def project do
     [
-      app: :task_cli,
+      app: @app_name,
       version: "0.1.0",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
+      escript: escript_config(),
       deps: deps()
     ]
+  end
+
+  defp escript_config do
+    [main_module: TaskCli, path: "build/#{@app_name}"]
   end
 
   # Run "mix help compile.app" to learn about applications.
