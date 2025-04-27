@@ -12,12 +12,19 @@ defmodule TaskCli.UI do
     IO.puts(String.duplicate("-", 50))
 
     Enum.each(tasks, fn [id, name, completed_at] ->
+      case completed_at do
+        "" -> IO.write(IO.ANSI.red())
+        _ -> IO.write(IO.ANSI.green())
+      end
+
       IO.puts("#{id} | #{String.pad_trailing(name, 20)} | #{format_status(completed_at)}")
     end)
+
+    IO.write(IO.ANSI.reset())
   end
 
   def render_prompt do
-    IO.write("Command|> ")
+    IO.write(IO.ANSI.reverse() <> "Command|>" <> IO.ANSI.reverse_off() <> " ")
   end
 
   defp format_status(""), do: "Incomplete"

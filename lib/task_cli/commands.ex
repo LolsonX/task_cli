@@ -15,7 +15,7 @@ defmodule TaskCli.Commands do
   """
 
   def handle_input("exit") do
-    State.update_tasks(fn _ -> [] end)
+    Storage.save_tasks(State.tasks())
     IO.puts("Goodbye!")
     :timer.sleep(500)
     UI.clear_screen()
@@ -29,7 +29,7 @@ defmodule TaskCli.Commands do
 
   def handle_input("list") do
     UI.clear_screen()
-    UI.print_task_list(State.tasks())
+    UI.print_task_list(State.tasks() |> Enum.take(29))
   end
 
   def handle_input("save") do
@@ -49,6 +49,7 @@ defmodule TaskCli.Commands do
   end
 
   def handle_input("add") do
+    UI.clear_screen()
     IO.puts("Please provide a task name.")
   end
 
@@ -56,10 +57,12 @@ defmodule TaskCli.Commands do
     id = State.pop_available_id()
     new_task = [id, String.trim(task_name), ""]
     State.update_tasks(fn tasks -> [new_task | tasks] end)
+    UI.clear_screen()
     IO.puts("Task added.")
   end
 
   def handle_input("remove") do
+    UI.clear_screen()
     IO.puts("Please provide a task ID.")
   end
 
@@ -71,14 +74,17 @@ defmodule TaskCli.Commands do
     end)
 
     State.return_id(formatted_id)
+    UI.clear_screen()
     IO.puts("Task removed.")
   end
 
   def handle_input("done") do
+    UI.clear_screen()
     IO.puts("Please provide a task ID.")
   end
 
   def handle_input("done " <> id) do
+    UI.clear_screen()
     mark_task(id, DateTime.utc_now() |> DateTime.to_string())
   end
 
@@ -87,6 +93,7 @@ defmodule TaskCli.Commands do
   end
 
   def handle_input("undo " <> id) do
+    UI.clear_screen()
     mark_task(id, "")
   end
 
@@ -109,6 +116,7 @@ defmodule TaskCli.Commands do
       end)
     end)
 
+    UI.clear_screen()
     IO.puts("Task updated.")
   end
 
