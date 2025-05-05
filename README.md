@@ -62,7 +62,6 @@ Example commands you can implement:
 ## 📦 Stretch Goals (Optional)
 
 - Add a background reminder process (Task + Process.send_after)
-- Support task priorities (high, medium, low)
 - Colorize terminal output (using IO.ANSI)
 
 ## 📄 License
